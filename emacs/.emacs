@@ -775,3 +775,6 @@ i.e. change right window to bottom, or change bottom window to right."
 
 ;; bind it to M-j
 (define-key ivy-minibuffer-map (kbd "M-j") 'bjm/ivy-yank-whole-word)
+
+
+(set-frame-font "Monaco 13" nil t)
