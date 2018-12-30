@@ -167,11 +167,6 @@
         (keyboard-translate ?\C-? ?\C-h)))))
 
 
-;; Restore the "desktop" - do this as late as possible
-(if first-time
-  (progn
-    (desktop-load-default)
-    (desktop-read)))
 
 ;; Indicate that this file has been read at least once
 (setq first-time nil)
@@ -218,7 +213,7 @@
 ;; See cedet/common/cedet.info for configuration details.
 ;;(load-file "~/Downloads/cedet-1.0.1/common/cedet.el")
 
-(add-to-list 'load-path "/home/john/emacs/lisp/")
+(add-to-list 'load-path "/Users/john/emacs/lisp/")
 
 ;;(require 'matlab-load)
 
@@ -226,83 +221,53 @@
 ;(setq mathematica-command-line "/usr/local/bin/math")
 
 
-
-(require 'tabbar)
-; turn on the tabbar
-(tabbar-mode t)
-; define all tabs to be one of 3 possible groups: “Emacs Buffer”, “Dired”,
-;“User Buffer”.
-
-(defun tabbar-buffer-groups ()
-  "Return the list of group names the current buffer belongs to.
-  This function is a custom function for tabbar-mode's tabbar-buffer-groups.
-  This function group all buffers into 3 groups:
-  Those Dired, those user buffer, and those emacs buffer.
-  Emacs buffer are those starting with “*”."
-  (list
-    (cond
-      ((string-equal "*" (substring (buffer-name) 0 1))
-       "Emacs Buffer"
-       )
-      ((eq major-mode 'dired-mode)
-       "Dired"
-       )
-      (t
-        "User Buffer"
-        )
-      ))) 
-
-(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-
-(global-set-key [M-s-left] 'tabbar-backward)
-(global-set-key [M-s-right] 'tabbar-forward)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
-        [default bold shadow italic underline bold bold-italic bold])
+   [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
-        ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(custom-enabled-themes (quote (sanityinc-tomorrow-blue)))
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+ '(custom-enabled-themes '(sanityinc-tomorrow-blue))
  '(custom-safe-themes
-        (quote
-         ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+   '("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default))
  '(fci-rule-color "#d6d6d6")
- '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(haskell-interactive-mode-hide-multi-line-errors nil)
  '(haskell-process-log t)
- '(haskell-process-type (quote cabal-repl))
- '(minimap-window-location (quote right))
+ '(haskell-process-type 'cabal-repl)
+ '(minimap-window-location 'right)
+ '(package-archives
+   '(("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/")))
  '(package-selected-packages
-        (quote
-         (ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum git-messenger erlang ensime clojure-mode)))
+   '(ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum git-messenger erlang ensime clojure-mode))
+ '(show-paren-mode t)
  '(spice-output-local "Gnucap")
  '(spice-simulator "Gnucap")
  '(spice-waveform-viewer "Gwave")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
-        (quote
-         ((20 . "#c82829")
-          (40 . "#f5871f")
-          (60 . "#eab700")
-          (80 . "#718c00")
-          (100 . "#3e999f")
-          (120 . "#4271ae")
-          (140 . "#8959a8")
-          (160 . "#c82829")
-          (180 . "#f5871f")
-          (200 . "#eab700")
-          (220 . "#718c00")
-          (240 . "#3e999f")
-          (260 . "#4271ae")
-          (280 . "#8959a8")
-          (300 . "#c82829")
-          (320 . "#f5871f")
-          (340 . "#eab700")
-          (360 . "#718c00"))))
+   '((20 . "#c82829")
+     (40 . "#f5871f")
+     (60 . "#eab700")
+     (80 . "#718c00")
+     (100 . "#3e999f")
+     (120 . "#4271ae")
+     (140 . "#8959a8")
+     (160 . "#c82829")
+     (180 . "#f5871f")
+     (200 . "#eab700")
+     (220 . "#718c00")
+     (240 . "#3e999f")
+     (260 . "#4271ae")
+     (280 . "#8959a8")
+     (300 . "#c82829")
+     (320 . "#f5871f")
+     (340 . "#eab700")
+     (360 . "#718c00")))
  '(vc-annotate-very-old-color nil))
 
 (custom-set-faces
@@ -333,16 +298,7 @@
 ;;;Declare a list of abbreviations                                                                                
 
 (require 'package)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa-stable" . "http://stable.melpa.org/packages/")))))
-(package-initialize)
+
 
 (defun my-f90-abbrevs ()
   "Add some abbreviations to make declaring allocatable arrays   easier"                                                        
@@ -415,7 +371,6 @@
 
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
 
@@ -460,33 +415,18 @@
 
 ;(require 'minimap)
 
-(package-initialize)
-(require 'color-theme)
-(setq color-theme-is-global t)
-(color-theme-initialize)
-;;(color-theme-feng-shui)
-;;(color-theme-sanityinc-tomorrow-eighties)
-;; (color-theme-blue-sea)
-;; (color-theme-euphoria)
-(color-theme-hober)
-
 (require 'hlinum)
 (hlinum-activate)
-(require 'git)
-
 (autoload 'magit-status "magit" nil t)
 
 (autoload 'wolfram-mode "wolfram-mode" nil t)
 (autoload 'run-wolfram "wolfram-mode" nil t)
 (setq wolfram-program "/usr/local/Wolfram/Mathematica/10.0/SystemFiles/Kernel/Binaries/Linux-x86-64/MathKernel")
                                                                                                                  
-                                                                                                                 
-
 (add-to-list 'auto-mode-alist '("\\.m$" . wolfram-mode))
 
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
 
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
@@ -517,11 +457,6 @@
 (require 'erlang-start)
 
 
-
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
-
-
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
@@ -550,7 +485,7 @@
 
 
 
-(add-to-list 'exec-path "/home/john/bin")
+(add-to-list 'exec-path "/Users/john/bin")
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
