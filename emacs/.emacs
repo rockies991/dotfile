@@ -332,6 +332,18 @@
 
 ;;;Declare a list of abbreviations                                                                                
 
+(require 'package)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/")))))
+(package-initialize)
+
 (defun my-f90-abbrevs ()
   "Add some abbreviations to make declaring allocatable arrays   easier"                                                        
   (add-abbrevs f90-mode-abbrev-table                                            
