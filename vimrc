@@ -3,19 +3,25 @@ set nocompatible | filetype indent plugin on | syn on
 filetype off     
 set rtp+=~/.vim/bundle/Vundle.vim
 
-execute pathogen#infect()
-
-set rtp+=~/.vim/bundle/Vundle.vim
-
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rudrab/vimf90' 
 Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
-"
-
+Plugin 'Buffergator'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 call vundle#end()            " required
+
+let g:deoplete#enable_at_startup = 1
+
 filetype plugin indent on    " required
 set autoindent
 set smartindent
@@ -109,8 +115,8 @@ au BufNewFile,BufRead *.cuh set ft=cu
 au BufNewFile,BufRead *.cuf set ft=fortran
 :syn on
 
-:highlight LineNr ctermfg=Black ctermbg=Gray
-:set cursorline
+":highlight LineNr ctermfg=Black ctermbg=Gray
+":set cursorline
 
 let fortran_do_enddo=1
 
@@ -192,7 +198,6 @@ let g:solarized_termtrans = 1  " New line!!
 "colorscheme DimSlate
 "colorscheme zellner
 "colorscheme LightGreen
-colorscheme northland
 set hlsearch
 
 vnoremap // y/<C-R>"<CR>
@@ -393,53 +398,24 @@ let g:vimtex_view_method = 'zathura'
 
 autocmd BufWinEnter * silent! :%foldopen!
 
-
 let g:python_recommended_style = 0
 set statusline+=%F
 set ts=4 shiftwidth=4 expandtab
 
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippetOrJump()
-  if g:ulti_expand_or_jump_res == 0
-    if pumvisible()
-      return "\<C-N>"
-    else
-      return "\<TAB>"
-    endif
-  endif
-
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" put this line first in ~/.vimrc
-set nocompatible | filetype indent plugin on | syn on
-
+" Ultisnips
 let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsSnippetsDir='/home/jfan/.vim/UltiSnips'
-let g:UltiSnipsSnippetDirectories=['/home/jfan/.vim/UltiSnips', '/home/jfan/.vim/bundle/vim-snippets/UltiSnips']
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsListSnippets="<c-l>"
-"
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:UltiSnipsSnippetDirectories = ['/Users/john_fan/.vim/UltiSnips', 'UltiSnips']
 
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+set encoding=utf-8
 
-highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+imap <expr><TAB>
+	 \ neosnippet#expandable_or_jumpable() ?
+	 \    "\<Plug>(neosnippet_expand_or_jump)" :
+         \ 	  pumvisible() ? "\<C-n>" : "\<TAB>"
