@@ -1,0 +1,35 @@
+#+TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELED(c)
+#+HTML_MATHJAX:  path:"http://localhost/Applications/SageMath/local/share/mathjax/MathJax.js?config=TeX-AMS_HTML"
+
+
+
+* TODO Quantum Field Theory 
+** Sidney Coleman
+** A. Zee
+* Machine Learning
+** Bishop
+* Check hire for Adi, Ryan, Yang
+  DEADLINE: <2019-02-22 Fri>
+
+* \alpha \beta \gamma \psi
+
+
+  #+begin_src python :results file
+
+import matplotlib, numpy
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+fig=plt.figure(figsize=(4,2))
+x=numpy.linspace(-15,15)
+plt.plot(numpy.sin(x)/x)
+fig.tight_layout()
+plt.savefig('images/python-matplot-fig.png')
+return 'images/python-matplot-fig.png' # return filename to org-mode
+
+  #+end_src
+
+  #+RESULTS:
+  [[file:images/python-matplot-fig.png]]
+ [[ [[file:images/python-matplot-fig.png]]]]
+
+
