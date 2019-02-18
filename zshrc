@@ -1,4 +1,5 @@
-# Path to your oh-my-zsh configuration.
+#AKIAI36R7HIHP226ECAA", Path to your oh-my-zsh configuration.
+export HOME=/Users/john_fan
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -15,7 +16,6 @@ ZSH=$HOME/.oh-my-zsh
 
 export EDITOR=/bin/vim
 export SVN_EDITOR=/bin/vim
-export GRADLE_HOME=/home/jfan/gradle
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -55,7 +55,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 #
-PATH=.:/usr/local/bin:$HOME/.pyenv/bin:/home/jfan/.pyenv/versions/3.6.6/bin/:/snap/bin/:~/bin:/usr/bin:/usr/local/bin:/home/jfan/.cabal/bin:/home/jfan/Downloads/scala/bin:/usr/bin:/usr/local/go/bin:/usr/lib64/mpich2/bin:/usr/local/MATLAB/R2017a/bin:$HOME/bin:/opt/gnome/bin:/opt/gnome/sbin:/opt/kde3/bin:/bin:/usr/bin:/usr/lib/teTeX/bin:/usr/X11/bin:/usr/sbin:/sbin:/usr/local/samba/bin:/usr/local/sbin:/opt/intel/bin/:/opt/openoffice.org/basis3.1/program:/opt/pgi/linux86-64/9.0-1/bin:/usr/lib64/openmpi/bin:/opt/intel/vtune/bin:/opt/sun/sunstudioceres/bin:/usr/local/FileZilla3/bin:/usr/local/cuda-5.5/computeprof/bin:/usr/local/scala/bin:/usr/pgsql-92/bin:/usr/lib/oracle/11.2/client64/bin/:/opt/pgi/linux86-64/13.10/bin:~/.tmuxifier/bin:/home/jfan/.cabal/bin:/opt/intel/itac/8.1.3/intel64/bin:/home/jfan/spark/bin:/local/texlive/2014/bin:$GRADLE_HOME/bin:/home/jfan/Downloads/julia/bin:/home/jfan/Downloads/juno-linux64/:/opt/pgi/linux86-64/2015/bin/:/home/jfan/go/bin:/home/jfan/vertx/bin:/usr/local/texlive/2014/bin/x86_64-lin:$KAFKA_HOME/bin:/usr/local/go/bin:/home/jfan/.pyenv/bin:/usr/local/kafka/bin:/usr/local/racket/bin:
+PATH=.:/usr/local/bin:/bin:/usr/bin:~/bin:/Library/Tex/texbin:/usr/local/sbin:/usr/sbin:/Applications/SageMath:
+
 export PATH
 
 alias   le="less "
@@ -71,7 +72,6 @@ alias   del="rm -f"
 alias   rm="rm -i"
 alias   free="free -m"
 alias   df="df -m"
-alias   bench="java -Xms1024m -jar /home/jfan/Downloads/workbench/sqlworkbench.jar&"
 alias   pc="xclip -o -selection clipboard | xclip -i "
 
 
@@ -87,12 +87,8 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 #source zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export TERM=rxvt-unicode-256color 
 
-# eval `dircolors /home/jfan/Downloads/dircolorsansi `
-eval "$(tmuxifier init -)"
 
-export SCALA_HOME=/home/jfan/scala
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export JAVACMD=$JAVA_HOME/bin/java
 
@@ -116,11 +112,6 @@ bindkey -M vicmd v edit-command-line
 
 stty ixany 
 stty ixoff -ixon
-
-export GRADLE_HOME="/home/jfan/.sdkman/candidates/gradle/current"
-export ATLAS_TOKEN="ciBZc8nizIVZUg.atlasv1.mkDVA7ezDLUnBnNGq7dzdYrWWCrWw2mMS6cFMGPiEHsA7gprpoCR7lYPU9qOmteT0Xg"
-
-export GOBIN=/home/jfan/bin
 
 bindkey "^R" history-incremental-search-backward
 
@@ -167,13 +158,6 @@ bindkey "^[[B" history-search-forward
 bindkey '^P' history-incremental-pattern-search-backward
 bindkey '^S' history-incremental-pattern-search-forward
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# OPAM configuration
-. /home/jfan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-export GRADLE_HOME="/home/jfan/.sdkman/candidates/gradle/current"
-
 #powerline-daemon -q
 #POWERLINE_ZSH_CONTINUATION=1
 #POWERLINE_ZSH_SELECT=1
@@ -182,7 +166,6 @@ export GRADLE_HOME="/home/jfan/.sdkman/candidates/gradle/current"
 zmodload zsh/mapfile
 zmodload zsh/regex
 setopt extended_glob
-export CLASSPATH=/home/jfan/lib/incanter.jar:.:$CLASSPATH
 
 # zmodload zsh/pcre
 
@@ -236,10 +219,7 @@ export MINIO_ACCESS_KEY=8UY5G5GWBB2UE44XLR79
 export ENDPOINT=9000
 export TERM=xterm-256color
 
-#eval "$(pyenv init -)"
- 
 export MY_ZONE=us-east-f
-
 let fortran_free_source=1
 let fortran_have_tabs=1
 let fortran_more_precise=1
@@ -253,12 +233,8 @@ bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (files and directo
 bindkey '^X^F' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
 bindkey '^X^D' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
-#export SA_JSON=$(cat ./work/spinnaker-sa.json)
-export PROJECT=$(gcloud info --format='value(config.project)')
-export BUCKET=$PROJECT-spinnaker-config
-
-export AWS_SECRET_ACCESS_KEY=iPTAQployyOThQpDVArQHdk7cp/oV77oLVC/xvTI
-export AWS_ACCESS_KEY_ID=AKIAI36R7HIHP226ECAA
+export AWS_SECRET_ACCESS_KEY=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
+export AWS_ACCESS_KEY_ID=AKIAINZXG6SD4LLTATBA
 
 alias dca='docker ps -a'
 alias dra='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q);di;dc;dca'
@@ -268,13 +244,7 @@ alias drc='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q);di;dc;dc
 alias sublime='/opt/sublime_text/sublime_text'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-config config --local status.showUntrackedFiles no
 
-source ~/liquidprompt/liquidprompt
-
-#export PATH="~/.pyenv/bin:$PATH"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
 
 export GOARCH="amd64"
 export GOBIN=""
@@ -283,10 +253,8 @@ export GOEXE=""
 export GOHOSTARCH="amd64"
 export GOHOSTOS="linux"
 export GOOS="linux"
-export GOPATH="/home/jfan/gocode"
 export GORACE=""
 export GOROOT="/usr/local/go"
-export GOTOOLDIR="/home/jfan/go/pkg/tool/linux_amd64"
 export CC="gcc"
 export GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0"
 export CXX="g++"
@@ -294,20 +262,6 @@ export CGO_ENABLED="1"
 
 
 # Syntax highlighting and tab completion
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Coloured man pages using less as pager
-man() {
-    env \
-	      LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-	      LESS_TERMCAP_md=$(printf "\e[1;31m") \
-	      LESS_TERMCAP_me=$(printf "\e[0m") \
-	      LESS_TERMCAP_se=$(printf "\e[0m") \
-	      LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-	      LESS_TERMCAP_ue=$(printf "\e[0m") \
-	      LESS_TERMCAP_us=$(printf "\e[1;36m") \
-	      man "$@"
-}
 
 export TERM=xterm-256color
 
@@ -402,17 +356,26 @@ ENABLE_CORRECTION="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins to load
-plugins=(git
-        virtualenv)
+plugins=(git virtualenv)
 source $ZSH/oh-my-zsh.sh
 
 # Prompt elements
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_user dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs time battery)
-
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_user dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs time battery)
 
 Plugins=(git z)
 #source ~/.fonts/*.sh
-source ~/bin/icons.zsh
+#source ~/bin/icons.zsh
 
 set -o vi
+alias v='f -e vim'
+export PATH=/usr/local/opt/curl/bin:/usr/local/go/bin:$PATH
+
+#export PATH="~/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+
+export PATH="/usr/local/opt/krb5/bin:$PATH"
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export PATH="/usr/local/opt/krb5/bin:$PATH"
