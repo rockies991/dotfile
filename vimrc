@@ -1,5 +1,3 @@
-set nocompatible | filetype indent plugin on | syn on
-
 filetype off     
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -18,14 +16,23 @@ Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'posva/vim-vue'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 Plugin 'mattn/calendar-vim'
-
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'ctrlp.vim'
+Plugin 'ncm2/ncm2'
+Plugin 'ncm2/ncm2-bufword'
+Plugin 'ncm2/ncm2-path'
+Plugin 'ncm2/ncm2-tern'
+Plugin 'ncm2/ncm2-ultisnips'
+Plugin 'Yggdroot/indentLine'
+Plugin 'miyakogi/conoline.vim'
+Plugin 'posva/vim-vue'
+Plugin 'zxqfl/tabnine-vim'
 call vundle#end()            " required
 
-let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on    " required
 set autoindent
@@ -52,7 +59,6 @@ set nohls
 :set cpo-=<
 :set wcm=<C-Z>
 :syntax on
-:fixdel
 set tags=./tags,tags,$HOME
 
 :autocmd BufReadPost *.doc %!antiword "%"
@@ -413,7 +419,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsSnippetDirectories = ['/Users/john_fan/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['/Users/john/.vim/UltiSnips', 'UltiSnips']
 
 set encoding=utf-8
 
@@ -424,3 +430,64 @@ imap <expr><TAB>
 	 \ neosnippet#expandable_or_jumpable() ?
 	 \    "\<Plug>(neosnippet_expand_or_jump)" :
          \ 	  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+let g:deoplete#enable_at_startup = 1
+
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeGlyphReadOnly = "RO"
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
+" Set no max file limit
+let g:ctrlp_max_files = 0
+" Search from current directory instead of project root
+let g:ctrlp_working_path_mode = 0
+
+" Ignore these directories
+set wildignore+=*/out/**
+set wildignore+=*/vendor/**
+
+" Search in certain directories a large project (hardcoded for now)
+cnoremap %proj <c-r>=expand('~/Projects/some-project')<cr>
+" ga = go api
+map <Leader>ga :CtrlP %proj/api/<cr>
+" gf = go frontend
+map <Leader>gf :CtrlP %proj/some/long/path/to/frontend/code/<cr>
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P 
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:conoline_auto_enable = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+"set cursorcolumn
+"set cursorline
+
+:highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+:highlight CursorColumn ctermfg=White ctermbg=darkgray cterm=bold guifg=white guibg=yellow gui=bold
+":highlight CursorLine ctermfg=White ctermbg=darkgray cterm=bold guifg=white guibg=#3E3D32 gui=bold
+
+:set statusline=%<%f\ %h%m%r\ %y%=%{v:register}\ %-14.(%l,%c%V%)\ %P
+set laststatus=2
+
