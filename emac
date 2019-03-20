@@ -249,6 +249,7 @@
  '(custom-safe-themes
    (quote
     ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+ '(epg-gpg-program "/usr/local/bin/gpg")
  '(fci-rule-color "#d6d6d6")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(haskell-interactive-mode-hide-multi-line-errors nil)
@@ -261,7 +262,7 @@
      ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company company-tabnine magit sr-speedbar frame-tabs helm-swoop helm-ag org-babel-eval-in-repl org-ehtml org-pdfview org-web-tools orgtbl-join orgtbl-ascii-plot org-easy-img-insert gnuplot-mode org-edna gnuplot htmlize helm-descbinds guide-key auto-compile org-projectile-helm org-projectile orgalist vue-mode yasnippet-classic-snippets ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum ensime clojure-mode)))
+    (org-trello org-transform-tree-table orgbox mu4e-maildirs-extension mu4e-jump-to-list mu4e-conversation mu4e-alert mu4e-query-fragments company company-tabnine magit sr-speedbar frame-tabs helm-swoop helm-ag org-babel-eval-in-repl org-ehtml org-pdfview org-web-tools orgtbl-join orgtbl-ascii-plot org-easy-img-insert gnuplot-mode org-edna gnuplot htmlize helm-descbinds guide-key auto-compile org-projectile-helm org-projectile orgalist vue-mode yasnippet-classic-snippets ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum ensime clojure-mode)))
  '(show-paren-mode t)
  '(spice-output-local "Gnucap")
  '(spice-simulator "Gnucap")
@@ -956,3 +957,34 @@ i.e. change right window to bottom, or change bottom window to right."
       '(company-tng-frontend
         company-pseudo-tooltip-frontend
         company-echo-metadata-frontend))
+
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook
+  '(lambda() (set-fill-column 80)))
+
+;; Trigger completion immediately.
+(setq company-idle-delay 0)
+
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-numbers t)
+
+;; Use the tab-and-go frontend.
+;; Allows TAB to select and complete at the same time.
+(company-tng-configure-default)
+(setq company-frontends
+      '(company-tng-frontend
+        company-pseudo-tooltip-frontend
+        company-echo-metadata-frontend))
+
+(add-hook 'after-init-hook 'global-company-mode)
+    
+    
+(require 'epa-file)
+
+(epa-file-enable)
+
