@@ -1,7 +1,22 @@
-    (defvar first-time t
+
+(defvar first-time t
       "Flag signifying this is the first time that .emacs has been evaled")
 
 ;; Meta
+
+(add-to-list 'load-path "~/emacs/lisp")
+
+(package-initialize)
+
+(require 'exec-path-from-shell)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+;; (when (memq window-system '(mac ns x))
+;;   (exec-path-from-shell-initialize))
+
+(setq ispell-program-name "/usr/local/bin/ispell")
+
 (global-set-key "\M- " 'set-mark-command)
 (global-set-key "\M-\C-h" 'backward-kill-word)
 (global-set-key "\M-\C-r" 'query-replace)
@@ -230,27 +245,32 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(custom-enabled-themes '(sanityinc-tomorrow-blue))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-blue)))
  '(custom-safe-themes
-   '("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default))
+   (quote
+    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+ '(epg-gpg-program "/usr/local/bin/gpg")
  '(fci-rule-color "#d6d6d6")
- '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(haskell-interactive-mode-hide-multi-line-errors nil)
  '(haskell-process-log t)
- '(haskell-process-type 'cabal-repl)
- '(minimap-window-location 'right)
+ '(haskell-process-type (quote cabal-repl))
+ '(minimap-window-location (quote right))
  '(package-archives
-   '(("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa-stable" . "http://stable.melpa.org/packages/")))
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
-   '(ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum git-messenger erlang ensime clojure-mode))
+   (quote
+    (org-trello org-transform-tree-table orgbox mu4e-maildirs-extension mu4e-jump-to-list mu4e-conversation mu4e-alert mu4e-query-fragments company company-tabnine magit sr-speedbar frame-tabs helm-swoop helm-ag org-babel-eval-in-repl org-ehtml org-pdfview org-web-tools orgtbl-join orgtbl-ascii-plot org-easy-img-insert gnuplot-mode org-edna gnuplot htmlize helm-descbinds guide-key auto-compile org-projectile-helm org-projectile orgalist vue-mode yasnippet-classic-snippets ivy-yasnippet yasnippet-snippets swiper yasnippet counsel yaml-tomato salt-mode neotree elein whole-line-or-region company-shell company-anaconda helm-ls-git helm-anything helm-cider all-ext ace-isearch ace-jump-helm-line ac-helm helm lispy pretty-mode prettify-greek pretty-symbols latex-pretty-symbols hl-sexp cider-profile cider-decompile ac-cider paredit hlinum ensime clojure-mode)))
  '(show-paren-mode t)
  '(spice-output-local "Gnucap")
  '(spice-simulator "Gnucap")
  '(spice-waveform-viewer "Gwave")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
-   '((20 . "#c82829")
+   (quote
+    ((20 . "#c82829")
      (40 . "#f5871f")
      (60 . "#eab700")
      (80 . "#718c00")
@@ -267,7 +287,7 @@
      (300 . "#c82829")
      (320 . "#f5871f")
      (340 . "#eab700")
-     (360 . "#718c00")))
+     (360 . "#718c00"))))
  '(vc-annotate-very-old-color nil))
 
 (custom-set-faces
@@ -378,7 +398,7 @@
 (autoload 'idomenu "idomenu" nil t)
 
 (setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
+;(setq ido-everywhere t)
 (ido-mode 1)
 
 ;(load "escreen")
@@ -404,9 +424,6 @@
 (global-set-key [M-up] 'shrink-window)
 (global-set-key [M-left] 'enlarge-window-horizontally)
 (global-set-key [M-right] 'shrink-window-horizontally)
-
-(require 'git-messenger)
-(global-set-key (kbd "C-x v p") 'git-messenger:popup-message)
 
 (setq tags-file-name "TAGS")
 
@@ -639,8 +656,6 @@
       (select-window first-win)
       (if this-win-2nd (other-window 1))))))
 
-(global-set-key (kbd "C-x |") 'toggle-window-split)
-
     
 (defun window-toggle-split-direction ()
   "Switch window split from horizontally to vertically, or vice versa.
@@ -778,3 +793,211 @@ i.e. change right window to bottom, or change bottom window to right."
 
 
 (set-frame-font "Monaco 13" nil t)
+;(set-default-font "-apple-DejaVu_Sans_Mono-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+
+
+(when window-system
+  (setq initial-frame-alist nil)   ;; Undo Aquamacs forced defaults
+  (setq default-frame-alist nil)   ;; Undo Aquamacs forced defaults
+  ;; (aquamacs-autoface-mode -1)      ;; Use one face (font) everywhere
+  (set-frame-font "Menlo-14")      ;; Set the default font to Menlo size 12
+  ;;(set-default-font "Menlo-12")  ;; This would do the same.
+)
+
+
+
+(require 'helm-config)
+
+;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-echo-input-in-header-line t)
+
+(defun spacemacs//helm-hide-minibuffer-maybe ()
+  "Hide minibuffer in Helm session if we use the header line as input field."
+  (when (with-helm-buffer helm-echo-input-in-header-line)
+    (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+      (overlay-put ov 'window (selected-window))
+      (overlay-put ov 'face
+                   (let ((bg-color (face-background 'default nil)))
+                     `(:background ,bg-color :foreground ,bg-color)))
+      (setq-local cursor-type nil))))
+
+
+(add-hook 'helm-minibuffer-set-up-hook
+          'spacemacs//helm-hide-minibuffer-maybe)
+
+(helm-mode 1)
+
+
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+(require 'org-projectile)
+(setq org-projectile-projects-file
+      "/Users/john/project/todos.org")
+(push (org-projectile-project-todo-entry) org-capture-templates)
+(setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
+
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((python . t)))
+
+
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-default-notes-file "~/project/organizer.org")
+
+(add-to-list 'load-path "~/elisp")
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
+(require 'use-package)
+(use-package auto-compile
+  :config (auto-compile-on-load-mode))
+(setq load-prefer-newer t)    
+
+(use-package guide-key
+  :defer t
+  :diminish guide-key-mode
+  :config
+  (progn
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (guide-key-mode 1)))  ; Enable guide-key-mode
+
+(display-time-mode 1)
+
+
+(use-package helm
+  :diminish helm-mode
+  :init
+  (progn
+    (require 'helm-config)
+    (setq helm-candidate-number-limit 100)
+    ;; From https://gist.github.com/antifuchs/9238468
+    (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+          helm-input-idle-delay 0.01  ; this actually updates things
+                                        ; reeeelatively quickly.
+          helm-yas-display-key-on-candidate t
+          helm-quick-update t
+          helm-M-x-requires-pattern nil
+          helm-ff-skip-boring-files t)
+    (helm-mode))
+  :bind (("C-c h" . helm-mini)
+         ("C-h a" . helm-apropos)
+         ("C-x C-b" . helm-buffers-list)
+         ("C-x b" . helm-buffers-list)
+         ("M-y" . helm-show-kill-ring)
+         ("M-x" . helm-M-x)
+         ("C-x c o" . helm-occur)
+         ("C-x c s" . helm-swoop)
+         ("C-x c y" . helm-yas-complete)
+         ("C-x c Y" . helm-yas-create-snippet-on-region)
+         ("C-x c b" . my/helm-do-grep-book-notes)
+         ("C-x c SPC" . helm-all-mark-rings)))
+(ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
+
+(use-package helm-descbinds
+  :defer t
+  :bind (("C-h b" . helm-descbinds)
+         ("C-h w" . helm-descbinds)))    
+
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-default-notes-file "~/project/organizer.org")
+
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((gnuplot . t)))
+;; add additional languages with '((language . t)))
+
+(setq org-babel-python-command "python3")
+
+(setq org-startup-with-inline-images t)
+(setq org-pretty-entities t)
+
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+(require 'sr-speedbar)
+(global-set-key "\M-1" 'sr-speedbar-toggle)
+
+
+(use-package company-tabnine :ensure t)
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)
+
+;; Trigger completion immediately.
+(setq company-idle-delay 0)
+
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-numbers t)
+
+;; Use the tab-and-go frontend.
+;; Allows TAB to select and complete at the same time.
+(company-tng-configure-default)
+(setq company-frontends
+      '(company-tng-frontend
+        company-pseudo-tooltip-frontend
+        company-echo-metadata-frontend))
+
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook
+  '(lambda() (set-fill-column 80)))
+
+;; Trigger completion immediately.
+(setq company-idle-delay 0)
+
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-numbers t)
+
+;; Use the tab-and-go frontend.
+;; Allows TAB to select and complete at the same time.
+(company-tng-configure-default)
+(setq company-frontends
+      '(company-tng-frontend
+        company-pseudo-tooltip-frontend
+        company-echo-metadata-frontend))
+
+(add-hook 'after-init-hook 'global-company-mode)
+    
+    
+(require 'epa-file)
+
+(epa-file-enable)
+
+(org-babel-do-load-languages 'org-babel-load-languages
+    '(
+        (shell . t)
+    )
+)
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-minted-options '(("breaklines" "true")
+                                 ("breakanywhere" "true")))
