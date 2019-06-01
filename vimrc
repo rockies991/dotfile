@@ -1,38 +1,44 @@
+set nocompatible | filetype indent plugin on | syn on
+
 filetype off     
+
 set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'rudrab/vimf90' 
-Plugin 'ervandew/supertab'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'Buffergator'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'jceb/vim-orgmode'
-Plugin 'tpope/vim-speeddating'
-Plugin 'mattn/calendar-vim'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'ctrlp.vim'
-Plugin 'ncm2/ncm2'
-Plugin 'ncm2/ncm2-bufword'
-Plugin 'ncm2/ncm2-path'
-Plugin 'ncm2/ncm2-tern'
-Plugin 'ncm2/ncm2-ultisnips'
-Plugin 'Yggdroot/indentLine'
-Plugin 'miyakogi/conoline.vim'
-Plugin 'posva/vim-vue'
-Plugin 'zxqfl/tabnine-vim'
-call vundle#end()            " required
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+"Plug 'rudrab/vimf90' 
 
+Plug 'andybalaam/vim-buffergator'
+
+"Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"Plug 'junegunn/fzf', { 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+"Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'posva/vim-vue'
+Plug 'jceb/vim-orgmode'
+"Plug 'tpope/vim-speeddating'
+Plug 'mattn/calendar-vim'
+Plug 'tpope/vim-surround'
+Plug 'kien/ctrlp.vim'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tern'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'Yggdroot/indentLine'
+Plug 'miyakogi/conoline.vim'
+Plug 'zxqfl/tabnine-vim'
+"Plug 'editorconfig/editorconfig-vim'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+call plug#end()
+
+set completeopt=noinsert,menuone,noselect
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on    " required
 set autoindent
@@ -59,7 +65,7 @@ set nohls
 :set cpo-=<
 :set wcm=<C-Z>
 :syntax on
-set tags=./tags,tags,$HOME
+set tags=./tags,tags;$HOME
 
 :autocmd BufReadPost *.doc %!antiword "%"
 
@@ -72,9 +78,6 @@ set tags=./tags,tags,$HOME
 :set noswapfile
 :nnoremap ; :
 
-filetype on
-filetype indent on
-filetype plugin on
 
 :set csto=1
 
@@ -149,7 +152,6 @@ let fortran_do_enddo=1
 
 :set mousemodel=popup
 
-:filetype on
 autocmd FileType tex call Fix_latex()
 function! Fix_latex()
     syntax spell toplevel
@@ -223,12 +225,11 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
-let $Tlist_Ctags_Cmd='/bin/ctags'
+let $Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
 map T :TaskList<CR>
 map P :TlistToggle<CR>
 
-filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 let python_highlight_all = 1
@@ -247,7 +248,7 @@ map <F3> :NERDTreeToggle<CR>
 
 " TagList Plugin Configuration
 "
-let Tlist_GainFocus_On_ToggleOpen = 1
+
 let Tlist_Close_On_Select = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_File_Fold_Auto_Close = 1
@@ -277,7 +278,6 @@ let g:pymod_rope = 0
 let g:pymod_rope_autoimport = 0
 
 syntax on
-filetype plugin indent on
 let g:paredit_leader = '\' 
 
 :map <F5> :setlocal spell! spelllang=en_us<CR>
@@ -302,11 +302,6 @@ set pastetoggle=<leader>p
 
 set autochdir
 autocmd FileType plaintex,tex,latex syntax spell toplevel
-
-set statusline=%b\ %B
-set shiftwidth=4
-set tabstop=4
-set expandtab
 
 noremap // y/<C-R>"<CR>
 
@@ -371,15 +366,6 @@ let clj_highlight_builtins = 1 "for clojure
 let g:rainbow_active = 1
 let g:rainbow_operators = 1
 
-let g:ycm_filetype_blacklist = {}
-let g:ycm_semantic_triggers = {'text': ["."]}
-let g:ycm_semantic_triggers.clojure = [' ']
-let g:ycm_semantic_triggers.clojure = ['rel!.']
-"set omnifunc=your_clojure_complete_function
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-
-
 let g:tex_flavor='latex'
 set shellslash
 set grepprg=grep\ -nH\ $*
@@ -419,7 +405,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsSnippetDirectories = ['/Users/john/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['/Users/john_fan/.vim/UltiSnips', 'UltiSnips']
 
 set encoding=utf-8
 
@@ -430,30 +416,9 @@ imap <expr><TAB>
 	 \ neosnippet#expandable_or_jumpable() ?
 	 \    "\<Plug>(neosnippet_expand_or_jump)" :
          \ 	  pumvisible() ? "\<C-n>" : "\<TAB>"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:deoplete#enable_at_startup = 1
-
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeGlyphReadOnly = "RO"
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" Set no max file limit
-let g:ctrlp_max_files = 0
-" Search from current directory instead of project root
-let g:ctrlp_working_path_mode = 0
-
-" Ignore these directories
-set wildignore+=*/out/**
-set wildignore+=*/vendor/**
-
-" Search in certain directories a large project (hardcoded for now)
-cnoremap %proj <c-r>=expand('~/Projects/some-project')<cr>
-" ga = go api
-map <Leader>ga :CtrlP %proj/api/<cr>
-" gf = go frontend
-map <Leader>gf :CtrlP %proj/some/long/path/to/frontend/code/<cr>
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
@@ -478,16 +443,79 @@ vnoremap <leader>P "+P
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:conoline_auto_enable = 1
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
 "set cursorcolumn
 "set cursorline
 
-:highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+":highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 :highlight CursorColumn ctermfg=White ctermbg=darkgray cterm=bold guifg=white guibg=yellow gui=bold
 ":highlight CursorLine ctermfg=White ctermbg=darkgray cterm=bold guifg=white guibg=#3E3D32 gui=bold
-
+"
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:conoline_auto_enable = 1
+    
 :set statusline=%<%f\ %h%m%r\ %y%=%{v:register}\ %-14.(%l,%c%V%)\ %P
 set laststatus=2
+
+"Make search faster
+:nnoremap <space> /
+
+set shiftwidth=4
+set tabstop=4
+set expandtab
+:map <F2> :set shiftwidth=4<CR>
+
+packadd minpac 
+call minpac#init()
+call minpac#add('mhinz/vim-grepper')
+call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+call minpac#add('/usr/local/opt/fzf')
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('tpope/vim-projectionist')
+call minpac#add('tpope/vim-dispatch')
+call minpac#add('radenling/vim-dispatch-neovim')
+
+command! PackUpdate call minpac#update() 
+command! PackClean call minpac#clean()
+
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+let g:grepper = {}
+let g:grepper.tools = ['grep', 'git', 'rg']
+" Search for the current word
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+" Search for the current selection
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+let g:python_host_skip_check=1
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_skip_check=1
+let g:python3_host_prog = '/usr/local/bin/python3'
 

@@ -185,8 +185,9 @@ ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="agnoster"
 #ZSH_THEME="xshay"
 
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME='cdimascio-lambda'
+ 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="↳ "
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -487,4 +488,12 @@ set -o vi
 alias fzl="fzf --preview=\"head -$LINES {}\""
 
 bindkey -s '^e' 'vim $(fzf)\n'
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+eval "$(pyenv init -)"
+
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
