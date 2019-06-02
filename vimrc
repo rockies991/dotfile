@@ -1,15 +1,10 @@
 set nocompatible | filetype indent plugin on | syn on
-
 filetype off     
-
 set rtp+=~/.vim/bundle/Vundle.vim
-
 call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 "Plug 'rudrab/vimf90' 
-
 Plug 'andybalaam/vim-buffergator'
-
 "Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -24,16 +19,17 @@ Plug 'jceb/vim-orgmode'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tern'
-Plug 'ncm2/ncm2-ultisnips'
+"Plug 'ncm2/ncm2'
+"Plug 'ncm2/ncm2-bufword'
+"Plug 'ncm2/ncm2-path'
+"Plug 'ncm2/ncm2-tern'
+"Plug 'ncm2/ncm2-ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'miyakogi/conoline.vim'
 Plug 'zxqfl/tabnine-vim'
 "Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'rsmenon/vim-mathematica'
 call plug#end()
 
 set completeopt=noinsert,menuone,noselect
@@ -66,8 +62,6 @@ set nohls
 :set wcm=<C-Z>
 :syntax on
 set tags=./tags,tags;$HOME
-
-:autocmd BufReadPost *.doc %!antiword "%"
 
 :set mouse=r
 :set backspace=indent,eol,start
@@ -244,8 +238,6 @@ let NERDTreeShowBookmarks=1
 map <F3> :NERDTreeToggle<CR>
 
 " Syntax for multiple tag files are
-"
-
 " TagList Plugin Configuration
 "
 
@@ -284,13 +276,9 @@ let g:paredit_leader = '\'
 set laststatus=2
 set statusline+=%F
 
-set autoread
-let g:pymode_rope = 0
-
 "let g:syntastic_python_checkers=['flake8']
 "let g:syntastic_python_flake8_args='--ignore=E501,E225,E702,E401,E302,W391,E271,E231,E251,E211'
-
-
+"
 map <F11> :PyflakesToggle<cr>
 let g:pymode_folding=0
 let g:pymode_warnings = 1
@@ -463,19 +451,6 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 :map <F2> :set shiftwidth=4<CR>
-
-packadd minpac 
-call minpac#init()
-call minpac#add('mhinz/vim-grepper')
-call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
-call minpac#add('/usr/local/opt/fzf')
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('tpope/vim-projectionist')
-call minpac#add('tpope/vim-dispatch')
-call minpac#add('radenling/vim-dispatch-neovim')
-
-command! PackUpdate call minpac#update() 
-command! PackClean call minpac#clean()
 
 let g:fzf_layout = { 'down': '~40%' }
 
