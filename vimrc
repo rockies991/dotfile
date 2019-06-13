@@ -1,6 +1,8 @@
 set nocompatible | filetype indent plugin on | syn on
 filetype off     
+
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 "Plug 'rudrab/vimf90' 
