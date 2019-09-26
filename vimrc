@@ -1,41 +1,47 @@
 set nocompatible | filetype indent plugin on | syn on
 filetype off     
 
-set rtp+=~/.vim/bundle/Vundle.vim
-
 call plug#begin('~/.vim/plugged')
+
 Plug 'VundleVim/Vundle.vim'
 "Plug 'rudrab/vimf90' 
 Plug 'andybalaam/vim-buffergator'
-"Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 "Plug 'junegunn/fzf', { 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-"Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'posva/vim-vue'
 Plug 'jceb/vim-orgmode'
-"Plug 'tpope/vim-speeddating'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim'
-"Plug 'ncm2/ncm2'
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-tern'
-"Plug 'ncm2/ncm2-ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'miyakogi/conoline.vim'
 Plug 'zxqfl/tabnine-vim'
-"Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'rsmenon/vim-mathematica'
+Plug 'hashivim/vim-terraform'
+Plug 'vim-scripts/sessionman.vim'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'davidhalter/jedi'
+Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
+Plug 'lervag/vimtex'
+Plug 'sheerun/vim-polyglot'
+
+
+"if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'deoplete-plugins/deoplete-jedi'
+"endif
+
 call plug#end()
 
-set completeopt=noinsert,menuone,noselect
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+"set completeopt=noinsert,menuone,noselect
+"inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on    " required
@@ -63,7 +69,7 @@ set nohls
 :set cpo-=<
 :set wcm=<C-Z>
 :syntax on
-set tags=./tags,tags;$HOME
+set tags=./tags,tags
 
 :set mouse=r
 :set backspace=indent,eol,start
@@ -79,9 +85,6 @@ set tags=./tags,tags;$HOME
 
 let g:tex_flavor='latex'
 set grepprg=grep\ -nH\ $*
-
-let g:Tex_Folding=0 "I don't like folding.
-set iskeyword+=:
 
 :imap ;; <Esc>
 ":set virtualedit=all
@@ -395,7 +398,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsSnippetDirectories = ['/Users/john_fan/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['/Users/john/.vim/UltiSnips', 'UltiSnips']
 
 set encoding=utf-8
 
@@ -494,5 +497,42 @@ xmap gs <plug>(GrepperOperator)
 let g:python_host_skip_check=1
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_skip_check=1
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/Users/john/.pyenv/shims/python'
 
+filetype plugin on
+filetype indent on
+set autoindent
+
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#show_call_signatures = "1"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+
+let g:pymode_rope = 0
+
+let g:SimpylFold_docstring_preview = 1
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
+
+" select last paste in visual mode
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
